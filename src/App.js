@@ -1,43 +1,34 @@
-
-import * as THREE from 'three';
-
-import React,{useRef} from 'react';
-import {Canvas,useFrame} from 'react-three-fiber';
-import { Model } from './components/ElEMENTS';
-import { OrbitControls } from '@react-three/drei';
-import { useGLTF } from '@react-three/drei';
-// import { Box } from 'drei';
-// const SpinningMesh = ({position,args}) => {
-//   const mesh = useRef(null)
-//   useFrame(()=>(mesh.current.rotation.x=mesh.current.rotation.y+=0.01));
-//   return (
-//     <>
-//       <mesh position={position} ref={mesh} className="mes">
-//         <boxBufferGeometry attach="geometry" args={[-2,3,1]}/>
-//         <meshStandardMaterial attach='material' color='blue'/>
-//       </mesh>
-//     </>
-//   )
-// }
-const Device = (props)=> {
-  const { nodes, materials } = useGLTF('/ElEMENTS.glb');
-  return (
-    <group {...props} dispose={null}>
-      <mesh geometry={nodes.Cube007.geometry} material={materials['Material.003']} rotation={[0, 1.28, 0]} scale={[0.23, 0.1, 0.23]} />
-    </group>
-  )
-}
+import React, { useState } from 'react';
+import AddProduct from './Components/AddProduct';
+import ProductList from './Components/ProductList';
+import Navbar from './Components/Navbar';
+import Register from './Components/Register';
+import Login from './Components/Login';
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+import Home from './Components/Home';
 function App() {
+  // const [products, setProducts] = useState([]);
+
+  // const addProduct = (product) => {
+  //   setProducts([...products, product]);
+  // };
+
   return (
-   <>
-   <Canvas>
-   <mesh>
-   <OrbitControls/>
-<Model/>
-   </mesh>
- 
-   </Canvas>
-   </>
+    <div className="App">
+    <Navbar/>
+    <Router>
+      <Routes>
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/' element={<Home/>}/>
+
+      </Routes>
+    </Router>
+      {/* <h1 className='d-flex justify-content-center'> add Product </h1>
+      <AddProduct onAddProduct={addProduct} />
+      <ProductList products={products} /> */}
+     
+    </div>
   );
 }
 
